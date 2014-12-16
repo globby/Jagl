@@ -72,3 +72,7 @@ To try out Jagl, download the repository and examples, and try them out. The hel
 
 [1]: http://www.golfscript.com/golfscript/
 [2]: https://github.com/isaacg1/pyth
+
+Conclusion
+----
+Please note that the language is still in Alpha, and may have bugs. If you encouter such a bug, please open an issue on the github repo. Happy code golfing!
