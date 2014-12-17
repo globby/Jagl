@@ -152,7 +152,6 @@ def prnt(stack):
 		sys.stdout.write(`top.v`[:-1])
 	else:
 		sys.stdout.write(`top.v`)
-	stack.push(top)
 	return stack
 
 def prntC(stack):
@@ -179,7 +178,6 @@ def prntC(stack):
 			sys.stdout.write(`top.v`[:-1])
 		else:
 			sys.stdout.write(`top.v`)
-	stack.push(top)
 	return stack
 
 def len_(stack):
