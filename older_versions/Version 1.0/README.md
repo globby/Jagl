@@ -18,6 +18,8 @@ Numeric types can contain either floating point or integer numbers, and have a v
 
 **Scientific** - `1e6`, `1.8e-8`
 
+**Binary** - `101101b`
+
 **Octal** - `70o`
 
 **Hexadecimal** - `8Fx`
@@ -67,7 +69,6 @@ To try out Jagl, download the repository and examples, and try them out. The hel
       -v, --version         show program's version number and exit
       -i, --inter           run the interactive interpreter (repl)
       -c CODE, --code CODE  execute code from the command line
-      -C, --changelog       print changelog
 
 [1]: http://www.golfscript.com/golfscript/
 [2]: https://github.com/isaacg1/pyth
@@ -75,32 +76,3 @@ To try out Jagl, download the repository and examples, and try them out. The hel
 Conclusion
 ----
 Please note that the language is still in Alpha, and may have bugs. If you encouter such a bug, please open an issue on the github repo. Happy code golfing!
-
-
-Changelog
-----
-    Version 1.1:
-      Added:
-        'z' - Push space character (JNum(32))
-
-        'Z' - Push line feed character (JNum(10))
-
-        'Y':
-          Arr, Any - Return an array of all indexes where an element appears
-                     in an array
-
-        Interpreter -C, changelog option
-
-      Changed:
-        Do and While no longer consume the test value to determine whether
-        or not to continue looping
-
-        Fixed dropif; it was dropping if the value was false instead of
-        true
-
-      Removed:
-        Binary number syntax. May add back if actually needed somewhere in
-        the future.
-
-    Version 1.0:
-      Initial release

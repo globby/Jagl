@@ -341,10 +341,12 @@ def rand(stack):
 
 	r = stack.pop()
 	if isinstance(r, JNum):
+		print "GOT HERE 1"
 		l = stack.pop()
 		if isinstance(l, JNum):
 			stack.push(JNum(random.randint(l.v, r.v)))
 		elif isinstance(l, JArray):
+			print "GOT HERE"
 			newarr = []
 			for _ in range(r.v):
 				newarr.append(random.choice(l.v))
@@ -437,15 +439,10 @@ def do(stack):
 	#For do and while, should it consume the conditional value?
 	
 	top = stack.pop()
-	if isinstance(top, JBlock):
-		while True:
-			stack = runOn(top.v, stack)
-			val = stack.pop()
-			stack.push(val)
-			if not val.v:
-				break
-	else:
-		stack.push(top)
+	while True:
+		stack = runOn(top.v, stack)
+		if not stack.pop().v:
+			break
 	return stack
 
 def while_(stack):
@@ -457,13 +454,12 @@ def while_(stack):
 	top = stack.pop()
 	if isinstance(top, JBlock):
 		while True:
-			val = stack.pop()
-			stack.push(val)
-			if not val.v:
+			val = stack.pop().v
+			if not val:
 				break
 			stack = runOn(top.v, stack)
 	else:
-		stack.push(top)
+		stack.append(top)
 	return stack
 
 def cycle(stack):
@@ -564,7 +560,7 @@ def dropif(stack):
 	'''
 
 	l, r = lr(stack)
-	if r.v:
+	if not r.v:
 		stack.push(l)
 	return stack
 
@@ -989,40 +985,6 @@ def index(stack):
 		stack.push([l, r])
 	return stack
 
-def space(stack):
-
-	'''
-		Push the space character (32)
-	'''
-
-	stack.push(JNum(32))
-	return stack
-
-def linefeed(stack):
-
-	'''
-		Push the line feed character (10)
-	'''
-
-	stack.push(JNum(10))
-	return stack
-
-def findall(stack):
-
-	'''
-		Arr, Any: Find all occurrences of Any in Arr
-	'''
-
-	l, r = lr(stack)
-	if isinstance(l, JArray):
-		stack.push(JArray([JNum(i) for i, v in enumerate(l.v) if v == r]))
-	else:
-		stack.push([l, r])
-	return stack
-
-def UNDEFINED(stack):
-	return stack
-
 def debug(stack):
 	s = stack.s
 	print "Stack: " + `s`[1:-1]
@@ -1049,8 +1011,6 @@ FUNCTIONS = {
 	"$":weave,
 	"a":any_,
 	"A":all_,
-	"b":UNDEFINED,
-	"B":UNDEFINED,
 	"c":cycle,
 	"C":cycle_,
 	"d":dup,
@@ -1060,15 +1020,10 @@ FUNCTIONS = {
 	"f":if_,
 	"F":ifelse,
 	"g":itos,
-	"G":UNDEFINED,
 	"h":halt,
-	"H":UNDEFINED,
 	"i":ctoi,
 	"I":dropif,
 	"j":remdups,
-	"J":UNDEFINED,
-	"k":UNDEFINED,
-	"K":UNDEFINED,
 	"l":len_,
 	"L":log,
 	"m":isPrime,
@@ -1079,8 +1034,6 @@ FUNCTIONS = {
 	"O":iswhitespace,
 	"p":prntC,
 	"P":prnt,
-	"q":UNDEFINED,
-	"Q":UNDEFINED,
 	"r":range_,
 	"R":rand,
 	"s":string,
@@ -1096,8 +1049,5 @@ FUNCTIONS = {
 	"x":lenstack,
 	"X":clearstack,
 	"y":splitAt,
-	"Y":findall,
-	"z":space,
-	"Z":linefeed,
 	"#":debug
 }
