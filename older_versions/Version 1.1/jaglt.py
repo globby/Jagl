@@ -12,22 +12,12 @@ class JType:
 		self.make(val)
 	def make(self, val):
 		self.v = val
+	def __repr__(self):
+		return self.__class__.__name__+"("+`self.v`+")"
 	def __eq__(self, other):
 		return other.v == self.v
-	def __cmp__(self, other):
-		return self.v.__cmp__(other.v)
-	def __add__(self, other):
-		if isinstance(other, JType):
-			return self.v + other.v
-		return self.v + other
-	def __mul__(self, other):
-		if isinstance(other, JType):
-			return self.v * other.v
-		return self.v * other
 	def __hash__(self):
 		return hash(self.v)
-	def __repr__(self):
-		return `self.v`
 
 class JNum(JType):
 	def make(self, val):
@@ -47,13 +37,9 @@ class JNum(JType):
 			self.v = val
 		#Maybe add 0AFr39 or whatever for radix
 
-class JArray(JType):
-	def __repr__(self):
-		return '('+" ".join(map(str, self.v))+')'
-class JBlock(JType):
-	def __repr__(self):
-		return '{'+''.join(map(lambda x: str(x), self.v))+'}'
+class JArray(JType):pass
 class JFunc(JType):pass
+class JBlock(JType):pass
 class EStr(JType):pass
 
 def Error(string, exit=False):

@@ -3,10 +3,6 @@ import math
 import random
 import itertools
 
-#
-import time
-#
-
 import jaglk
 
 from jaglt import *
@@ -151,11 +147,11 @@ def prnt(stack):
 	#For prnt and prntC, should it consume the value after printing?
 
 	top = stack.pop()
-	trep = str(top)
+	trep = `top.v`
 	if isinstance(top, JNum) and trep.endswith("L"):
-		sys.stdout.write(trep[:-1])
+		sys.stdout.write(`top.v`[:-1])
 	else:
-		sys.stdout.write(trep)
+		sys.stdout.write(`top.v`)
 	return stack
 
 def prntC(stack):
@@ -219,7 +215,6 @@ def mod(stack):
 	'''
 		Num, Num: Modulus
 		Arr, Blk: Filter
-		Arr, Arr: Zip
 	'''
 
 	l, r = lr(stack)
@@ -234,8 +229,6 @@ def mod(stack):
 			if tstack.pop().v != 0:
 				newarr.append(item)
 		stack.push(JArray(newarr))
-	elif isinstance(l, JArray) and isinstance(r, JArray):
-		stack.push(JArray(zip(l.v, r.v)))
 	else:
 		stack.push([l, r])
 	return stack
@@ -439,7 +432,7 @@ def swap(stack):
 def do(stack):
 
 	'''
-		Blk: Do blk and then pop, if true then continue
+		Blk: Do blk and then pop, if true then stop
 	'''
 	#For do and while, should it consume the conditional value?
 	
@@ -567,7 +560,7 @@ def or_(stack):
 def dropif(stack):
 
 	'''
-		Any, Any: If right then keep
+		Any, Any: If right then drop
 	'''
 
 	l, r = lr(stack)
@@ -592,8 +585,8 @@ def if_(stack):
 def ifelse(stack):
 
 	'''
-		Blk, Blk, Any: If cnd, run r, else run l
-		Any, Any, Any: If cnd, keep r, else keep l
+		Blk, Blk, Any: If cnd, run l, else run r
+		Any, Any, Any: If cnd, keep l, else keep r
 	'''
 
 	cnd = stack.pop()
@@ -649,7 +642,7 @@ def isPrime(stack):
 		i, prime = top.v, True
 		if i > 0:
 			if i <= 3:
-				pass
+				prime = i <= 2
 			elif i%2==0 or i%3==0:
 				prime = False
 			for n in range(5, int(i**0.5)+1, 6):
@@ -821,14 +814,24 @@ def isalphanum(stack):
 	
 	'''
 		Num: Checks if char is alphanumeric
-		Arr: Checks if string is alphanumeric
 	'''
 
 	top = stack.pop()
 	if isinstance(top, JNum):
 		stack.push(JNum(1) if chr(top.v).isalnum() else JNum(0))
-	elif isinstance(top, JArray):
-		stack.push(JNum(1) if ''.join(map(lambda x: chr(x.v), top.v)).isalnum() else JNum(0))
+	else:
+		stack.push(top)
+	return stack
+
+def isalpha(stack):
+
+	'''
+		Num: Checks if char is alphabetical
+	'''
+
+	top = stack.pop()
+	if isinstance(top, JNum):
+		stack.push(JNum(1) if chr(top.v).isalpha() else JNum(0))
 	else:
 		stack.push(top)
 	return stack
@@ -837,14 +840,11 @@ def isnum(stack):
 	
 	'''
 		Num: Checks if char is numeric
-		Arr: Checks if string is numeric
 	'''
 
 	top = stack.pop()
 	if isinstance(top, JNum):
 		stack.push(JNum(1) if chr(top.v).isdigit() else JNum(0))
-	elif isinstance(top, JArray):
-		stack.push(JNum(1) if ''.join(map(lambda x: chr(x.v), top.v)).isdigit() else JNum(0))
 	else:
 		stack.push(top)
 	return stack
@@ -859,8 +859,6 @@ def iswhitespace(stack):
 	top = stack.pop()
 	if isinstance(top, JNum):
 		stack.push(JNum(1) if chr(top.v).isspace() else JNum(0))
-	elif isinstance(top, JArray):
-		stack.push(JNum(1) if ''.join(map(lambda x: chr(x.v), top.v)).isspace() else JNum(0))
 	else:
 		stack.push(top)
 	return stack
@@ -899,7 +897,7 @@ def flatten(stack):
 def itos(stack):
 
 	'''
-		Num: Number to its string representation
+		Num: Integer to its string representation
 	'''
 
 	top = stack.pop()
@@ -1022,86 +1020,12 @@ def findall(stack):
 		stack.push([l, r])
 	return stack
 
-def min_(stack):
-
-	'''
-		Arr: Minimum
-	'''
-
-	top = stack.pop()
-	if isinstance(top, JArray):
-		stack.push(JArray(min(top.v)))
-	else:
-		stack.push(top)
-	return stack
-
-def max_(stack):
-
-	'''
-		Arr: Maximum
-	'''
-	top = stack.pop()
-	if isinstance(top, JArray):
-		stack.push(JArray(max(top.v)))
-	else:
-		stack.push(top)
-	return stack
-
-def sorted_(stack):
-	
-	'''
-		Arr: Sorted array
-	'''
-
-	top = stack.pop()
-	if isinstance(top, JArray):
-		stack.push(JArray(sorted(top.v)))
-	else:
-		stack.push(top)
-	return stack
-
-def sum_(stack):
-	
-	'''
-		Arr: Sum of array (hacky solution)
-	'''
-
-	top = stack.pop()
-	if isinstance(top, JArray):
-		try:
-			string = " ".join(map(lambda x: str(x), top.v))
-			string += "+"*(len(top.v)-1)
-			stack = runOn(jaglk.tokenize(string), stack)
-		except:
-			stack.push(JNum(-1))									#Should it push -1?
-	else:
-		stack.push(top)
-	return stack
-
-def product_(stack):
-	
-	'''
-		Arr: Product of array
-	'''
-
-	top = stack.pop()
-	if isinstance(top, JArray):
-		try:
-			string = " ".join(map(lambda x: str(x), top.v))
-			string += "*"*(len(top.v)-1)
-			stack = runOn(jaglk.tokenize(string), stack)
-		except:
-			stack.push(JNum(-1))									#Should it push -1?
-	else:
-		stack.push(top)
-	return stack
-
 def UNDEFINED(stack):
 	return stack
 
 def debug(stack):
 	s = stack.s
-	print " ".join(map(lambda x: "%s< %s >" % (x.__class__.__name__, x), s))
+	print "Stack: " + `s`[1:-1]
 	return stack
 
 FUNCTIONS = {
@@ -1125,8 +1049,8 @@ FUNCTIONS = {
 	"$":weave,
 	"a":any_,
 	"A":all_,
-	"b":sum_,
-	"B":product_,
+	"b":UNDEFINED,
+	"B":UNDEFINED,
 	"c":cycle,
 	"C":cycle_,
 	"d":dup,
@@ -1142,7 +1066,7 @@ FUNCTIONS = {
 	"i":ctoi,
 	"I":dropif,
 	"j":remdups,
-	"J":sorted_,
+	"J":UNDEFINED,
 	"k":UNDEFINED,
 	"K":UNDEFINED,
 	"l":len_,
@@ -1155,8 +1079,8 @@ FUNCTIONS = {
 	"O":iswhitespace,
 	"p":prntC,
 	"P":prnt,
-	"q":min_,
-	"Q":max_,
+	"q":UNDEFINED,
+	"Q":UNDEFINED,
 	"r":range_,
 	"R":rand,
 	"s":string,

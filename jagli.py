@@ -23,7 +23,7 @@ def runCode(code):
 if __name__ == "__main__":
 	parser = argparse.ArgumentParser(description="JAGL (Just A Golfing Language) Interpreter")
 	parser.add_argument('filename', help='filename', nargs='?', default=None)
-	parser.add_argument('-v', '--version', action='version', version='%(prog)s Alpha V1.1 Released Dec 18/2014')
+	parser.add_argument('-v', '--version', action='version', version='%(prog)s Alpha V1.2 Released Dec 21/2014')
 	parser.add_argument('-i', '--inter', action='store_true', help='run the interactive interpreter')
 	parser.add_argument('-c', '--code', help='execute code from the command line')
 	parser.add_argument('-C', '--changelog',action='store_true', help='print changelog')
@@ -33,28 +33,48 @@ if __name__ == "__main__":
 		print """
   Changelog:
 
-    Version 1.1:
+    Version 1.2:
       Added:
-        'z' - Push space character (JNum(32))
-
-        'Z' - Push line feed character (JNum(10))
-
-        'Y':
-          Arr, Any - Return an array of all indexes where an element appears
-                     in an array
-
-        Interpreter -C, changelog option
+        1) 'q' - Push minimum value of array
+        2) 'Q' - Push maximum value of array
+        3) 'b' - Push sum of array (more accurately, fold array with the '+'
+                 function)
+        4) 'B' - Push product of array (more accurately, fold array with the '*'
+                 function)
+        5) 'J' - Push sorted array
 
       Changed:
-        Do and While no longer consume the test value to determine whether
-        or not to continue looping
+        1) '%' - If used on two arrays, now zips the arrays
+        2) 'M' (isNumeric), 'N' (isAlphaNumeric), and 'O' (isWhitespace)
+           now work on arrays as well (performing the function to
+           every element in the array and returning the boolean ALL)
+        2) The __repr__ method on types now more accurately represents the data
+           encased in them   
+        3) Added __add__ and __mul__ methods on types to accomodate sum and
+           product
+        4) Changed the output format of '#'
+        5) Added MUCH better documentation
 
-        Fixed dropif; it was dropping if the value was false instead of
-        true
+    Version 1.1:
+      Added:
+        1) 'z' - Push space character (JNum(32))
+        2) 'Z' - Push line feed character (JNum(10))
+        3) 'Y':
+            Arr, Any - Push array of all indexes where an element appears
+                       in an array
+
+        4) Interpreter -C, changelog option
+
+      Changed:
+        1) Do and While no longer consume the test value to determine whether
+           or not to continue looping
+
+        2) Fixed dropif; it was dropping if the value was false instead of
+           true
 
       Removed:
-        Binary number syntax. May add back if actually needed somewhere in
-        the future.
+        1) Binary number syntax. May add back if actually needed somewhere in
+           the future.
 
     Version 1.0:
       Initial release
@@ -64,7 +84,7 @@ if __name__ == "__main__":
 	try:
 		try:
 			if args.inter:
-				print "JAGL Interpreter Alpha V1.1 - Dec 18/2014"
+				print "JAGL Interpreter Alpha V1.2 - Dec 21/2014"
 				s = Stack()
 				while True:
 					try:
