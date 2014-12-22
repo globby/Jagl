@@ -228,10 +228,9 @@ def mod(stack):
 	elif isinstance(l, JArray) and isinstance(r, JBlock):
 		newarr = []
 		for item in l.v:
-			tstack = Stack()									#Controversial: Should this temporary stack be used?
-			tstack.push(item)
-			stack = runOn(r.v, tstack)
-			if tstack.pop().v != 0:
+			stack.push(item)
+			stack = runOn(r.v, stack)
+			if stack.pop().v != 0:
 				newarr.append(item)
 		stack.push(JArray(newarr))
 	elif isinstance(l, JArray) and isinstance(r, JArray):
@@ -253,10 +252,9 @@ def div(stack):
 	elif isinstance(l, JArray) and isinstance(r, JBlock):
 		newarr = []
 		for item in l.v:
-			tstack = Stack()
-			tstack.push(item)
-			stack = runOn(r.v, tstack)
-			newarr.append(tstack.pop())
+			stack.push(item)
+			stack = runOn(r.v, stack)
+			newarr.append(stack.pop())
 		stack.push(JArray(newarr))
 	else:
 		stack.push([l, r])
