@@ -485,6 +485,7 @@ def cycle_(stack):
 
 	'''
 		Num: Cycle stack x rotations
+		Arr: Reverse array
 	'''
 
 	top = stack.pop()
@@ -496,6 +497,8 @@ def cycle_(stack):
 		else:
 			for _ in range(top.v*-1):
 				s = s[1:]+[s[0]]
+	elif isinstance(top, JArray):
+		stack.push(JArray(top.v[::-1]))
 	else:
 		s.append(top)
 	return Stack(s)

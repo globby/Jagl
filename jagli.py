@@ -48,12 +48,13 @@ if __name__ == "__main__":
         2) 'M' (isNumeric), 'N' (isAlphaNumeric), and 'O' (isWhitespace)
            now work on arrays as well (performing the function to
            every element in the array and returning the boolean ALL)
-        2) The __repr__ method on types now more accurately represents the data
+        3) 'C' - If used on an array, reverses the array
+        4) The __repr__ method on types now more accurately represents the data
            encased in them   
-        3) Added __add__ and __mul__ methods on types to accomodate sum and
+        5) Added __add__ and __mul__ methods on types to accomodate sum and
            product
-        4) Changed the output format of '#'
-        5) Added MUCH better documentation
+        6) Changed the output format of '#'
+        7) Added MUCH better documentation
 
     Version 1.1:
       Added:
