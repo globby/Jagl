@@ -7,8 +7,8 @@ from jaglf import *
 JRE_Num = [
 	re.compile(r"[0-8]+o"), 									#Octal
 	re.compile(r"[\dA-F]+h"), 									#Hex
+	re.compile(r"(?:-?\d+(?:\.(?:\d+)?)?|\.\d+|-?\d+)e-?\d+"), 	#Scientific
 	re.compile(r"-?\d+(?:\.(?:\d+)?)?|-?\.\d+"), 				#Decimal
-	re.compile(r"(?:-?\d+(?:\.(?:\d+)?)?|\.\d+|-?\d+)e-?\d+") 	#Scientific
 ]
 
 JRE_Str  = re.compile(r'"(?:[^\\"]|\\.)*"')						#String syntactic sugar
