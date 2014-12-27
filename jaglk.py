@@ -6,7 +6,7 @@ from jaglf import *
 ''' Regexes '''
 JRE_Num = [
 	re.compile(r"[0-8]+o"), 									#Octal
-	re.compile(r"[\dA-F]+h"), 									#Hex
+	re.compile(r"[\dA-F]+x"), 									#Hex
 	re.compile(r"(?:-?\d+(?:\.(?:\d+)?)?|\.\d+|-?\d+)e-?\d+"), 	#Scientific
 	re.compile(r"-?\d+(?:\.(?:\d+)?)?|-?\.\d+"), 				#Decimal
 ]
