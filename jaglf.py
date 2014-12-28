@@ -234,7 +234,7 @@ def mod(stack):
 				newarr.append(item)
 		stack.push(JArray(newarr))
 	elif isinstance(l, JArray) and isinstance(r, JArray):
-		stack.push(JArray(zip(l.v, r.v)))
+		stack.push(JArray(map(lambda x: JArray(x),zip(l.v, r.v))))
 	else:
 		stack.push([l, r])
 	return stack
