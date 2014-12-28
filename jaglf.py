@@ -1031,7 +1031,7 @@ def min_(stack):
 
 	top = stack.pop()
 	if isinstance(top, JArray):
-		stack.push(JArray(min(top.v)))
+		stack.push(JNum(min(top.v)))
 	else:
 		stack.push(top)
 	return stack
@@ -1043,7 +1043,7 @@ def max_(stack):
 	'''
 	top = stack.pop()
 	if isinstance(top, JArray):
-		stack.push(JArray(max(top.v)))
+		stack.push(JNum(max(top.v)))
 	else:
 		stack.push(top)
 	return stack
