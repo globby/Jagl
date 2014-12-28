@@ -49,12 +49,13 @@ if __name__ == "__main__":
            now work on arrays as well (performing the function to
            every element in the array and returning the boolean ALL)
         3) 'C' - If used on an array, reverses the array
-        4) The __repr__ method on types now more accurately represents the data
+        4) 'r' - Now works on single integers
+        5) The __repr__ method on types now more accurately represents the data
            encased in them   
-        5) Added __add__ and __mul__ methods on types to accomodate sum and
+        6) Added __add__ and __mul__ methods on types to accomodate sum and
            product
-        6) Changed the output format of '#'
-        7) Added MUCH better documentation
+        7) Changed the output format of '#'
+        8) Added MUCH better documentation
 
     Version 1.1:
       Added:

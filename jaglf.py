@@ -318,22 +318,32 @@ def range_(stack):
 		Array, Block: Fold right
 	'''
 
-	l, r = lr(stack)
-	if isinstance(l, JNum) and isinstance(r, JNum):
-		stack.push(JArray(map(JNum,range(l.v, r.v))))
-	elif isinstance(l, JArray) and isinstance(r, JBlock):
-		arr = l.v[::-1]
-		if arr:
-			acc = arr[0]
-			arr = arr[1:]
-			for val in arr:
-				stack.push([acc, val])
-				stack = runOn(r.v, stack)
-				acc = stack.pop()
-			stack.push(acc)
-		#Should JNum(0) be pushed if the array is empty?
+	r = stack.pop()
+	if len(stack.s):
+		l = stack.pop()
+		if isinstance(l, JNum) and isinstance(r, JNum):
+			stack.push(JArray(map(JNum,range(l.v, r.v))))
+		elif isinstance(r, JNum):
+			stack.push(l)
+			stack.push(JArray(map(JNum, range(r.v))))
+		elif isinstance(l, JArray) and isinstance(r, JBlock):
+			arr = l.v[::-1]
+			if arr:
+				acc = arr[0]
+				arr = arr[1:]
+				for val in arr:
+					stack.push([acc, val])
+					stack = runOn(r.v, stack)
+					acc = stack.pop()
+				stack.push(acc)
+			#Should JNum(0) be pushed if the array is empty?
+		else:
+			stack.push([l, r])
 	else:
-		stack.push([l, r])
+		if isinstance(r, JNum):
+			stack.push(JArray(map(JNum,range(r.v))))
+		else:
+			stack.push(r)
 	return stack
 
 def rand(stack):
