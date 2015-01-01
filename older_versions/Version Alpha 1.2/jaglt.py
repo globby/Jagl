@@ -63,7 +63,7 @@ def Error(string, exit=False):
 
 class Stack:
 	def __init__(self, s=[]):
-		self.s = s[:]
+		self.s = s
 	def push(self, val):
 		if val:
 			if isinstance(val, list):

@@ -15,11 +15,6 @@ JRE_Str  = re.compile(r'"(?:[^\\"]|\\.)*"')						#String syntactic sugar
 JRE_EStr = re.compile(r"'(?:[^\\/]|\\.)*'")						#Escaped string syntactic sugar
 
 
-''' Preprocessor for shorthands '''
-def preprocess(string):
-	string = re.sub(r"([^\s\d\}orfF/%z])([orfF/%z])", r"{\1}\2", string)							#Shorthand for one function map
-	
-	return string
 
 
 ''' Make a bracket map for array '''
@@ -92,7 +87,6 @@ def makeArray(string):
 
 ''' Tokenizer '''
 def tokenize(string):
-	string = preprocess(string)
 	il = classifyLevel(string)
 	tokens = []
 	for s, e, clss in il:

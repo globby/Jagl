@@ -79,19 +79,6 @@ Please note that the language is still in the Alpha stage, and may have bugs. If
 
 Changelog
 ----
-
-    Version 1.3:
-      Added:
-        1) Additional functionality was added to 'n' when operating on arrays
-        2) 'z' - Now performs a zipWith, using a temporary stack
-        3) 'G' - Now encases the stack in an array
-
-      Changed:
-        1) The conditional value in if and ifelse is now the leftmost argument
-        2) The conditional drop ('I') is now built into 'f'
-        3) 'R', when operating with arrays, no longer consumes the array
-        4) 'k' and 'K' replace 'z' and 'Z' respectively
-
     Version 1.2:
       Added:
         1) 'q' - Push minimum value of array
@@ -108,13 +95,12 @@ Changelog
            now work on arrays as well (performing the function to
            every element in the array and returning the boolean ALL)
         3) 'C' - If used on an array, reverses the array
-        4) 'r' - Now works on single integers
-        5) The __repr__ method on types now more accurately represents the data
+        4) The __repr__ method on types now more accurately represents the data
            encased in them   
-        6) Added __add__ and __mul__ methods on types to accomodate sum and
+        5) Added __add__ and __mul__ methods on types to accomodate sum and
            product
-        7) Changed the output format of '#'
-        8) Added MUCH better documentation
+        6) Changed the output format of '#'
+        7) Added MUCH better documentation
 
     Version 1.1:
       Added:
@@ -136,9 +122,6 @@ Changelog
       Removed:
         1) Binary number syntax. May add back if actually needed somewhere in
            the future.
-
-    Version 1.0:
-      Initial release
 
     Version 1.0:
       Initial release

@@ -6,8 +6,6 @@ About
 
 Jagl is a stack based programming language inspired by [Golfscript][1] and [Pyth][2]. The underlying framework was designed to be easy to expand upon.
 
-Following is a brief documentation. For a full reference of functions, refer to **Documentation V1.2.pdf**
-
 
 Types
 ----
@@ -43,6 +41,8 @@ The Jagl Blocks are analogous with the code blocks found in Golfscript. They con
 #### Functions
 Functions are simply names which do a set of operations on the stack, or items on the stack. Some help with program flow, and many work differently depending on what types are at the top of the stack.
 
+A more complete reference for functions will be written as soon as I have time, but for now, all functions are relatively well documented in the **jaglf.py** file. 
+
 Files
 ----
 **jaglt.py** - Contains the Jagl type classes (Numeric, Array, Block)
@@ -74,71 +74,33 @@ To try out Jagl, download the repository and examples, and try them out. The hel
 
 Conclusion
 ----
-Please note that the language is still in the Alpha stage, and may have bugs. If you encouter one, please open an issue on the github repo. Happy code-golfing!
+Please note that the language is still in Alpha, and may have bugs. If you encouter such a bug, please open an issue on the github repo. Happy code golfing!
 
 
 Changelog
 ----
-
-    Version 1.3:
-      Added:
-        1) Additional functionality was added to 'n' when operating on arrays
-        2) 'z' - Now performs a zipWith, using a temporary stack
-        3) 'G' - Now encases the stack in an array
-
-      Changed:
-        1) The conditional value in if and ifelse is now the leftmost argument
-        2) The conditional drop ('I') is now built into 'f'
-        3) 'R', when operating with arrays, no longer consumes the array
-        4) 'k' and 'K' replace 'z' and 'Z' respectively
-
-    Version 1.2:
-      Added:
-        1) 'q' - Push minimum value of array
-        2) 'Q' - Push maximum value of array
-        3) 'b' - Push sum of array (more accurately, fold array with the '+'
-                 function)
-        4) 'B' - Push product of array (more accurately, fold array with the '*'
-                 function)
-        5) 'J' - Push sorted array
-
-      Changed:
-        1) '%' - If used on two arrays, now zips the arrays
-        2) 'M' (isNumeric), 'N' (isAlphaNumeric), and 'O' (isWhitespace)
-           now work on arrays as well (performing the function to
-           every element in the array and returning the boolean ALL)
-        3) 'C' - If used on an array, reverses the array
-        4) 'r' - Now works on single integers
-        5) The __repr__ method on types now more accurately represents the data
-           encased in them   
-        6) Added __add__ and __mul__ methods on types to accomodate sum and
-           product
-        7) Changed the output format of '#'
-        8) Added MUCH better documentation
-
     Version 1.1:
       Added:
-        1) 'z' - Push space character (JNum(32))
-        2) 'Z' - Push line feed character (JNum(10))
-        3) 'Y':
-            Arr, Any - Push array of all indexes where an element appears
-                       in an array
+        'z' - Push space character (JNum(32))
 
-        4) Interpreter -C, changelog option
+        'Z' - Push line feed character (JNum(10))
+
+        'Y':
+          Arr, Any - Return an array of all indexes where an element appears
+                     in an array
+
+        Interpreter -C, changelog option
 
       Changed:
-        1) Do and While no longer consume the test value to determine whether
-           or not to continue looping
+        Do and While no longer consume the test value to determine whether
+        or not to continue looping
 
-        2) Fixed dropif; it was dropping if the value was false instead of
-           true
+        Fixed dropif; it was dropping if the value was false instead of
+        true
 
       Removed:
-        1) Binary number syntax. May add back if actually needed somewhere in
-           the future.
-
-    Version 1.0:
-      Initial release
+        Binary number syntax. May add back if actually needed somewhere in
+        the future.
 
     Version 1.0:
       Initial release
