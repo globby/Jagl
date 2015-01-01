@@ -74,7 +74,7 @@ To try out Jagl, download the repository and examples, and try them out. The hel
 
 Conclusion
 ----
-Please note that the language is still in the Alpha stagh, and may have bugs. If you encouter such a bug, please open an issue on the github repo. Happy code golfing!
+Please note that the language is still in the Alpha stage, and may have bugs. If you encouter one, please open an issue on the github repo. Happy code-golfing!
 
 
 Changelog
