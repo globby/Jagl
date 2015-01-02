@@ -17,7 +17,7 @@ JRE_EStr = re.compile(r"'(?:[^\\/]|\\.)*'")						#Escaped string syntactic sugar
 
 ''' Preprocessor for shorthands '''
 def preprocess(string):
-	string = re.sub(r'([^\s\d\}orfF/%z])([orfF/%z])(?=([^"\\]*(\\.|"([^"\\]*\\.)*[^"\\]*"))*[^"]*$)(?=([^\'\\]*(\\.|\'([^\'\\]*\\.)*[^\'\\]*\'))*[^\']*$)', r"{\1}\2", string)							#Shorthand for one function map
+	string = re.sub(r'([^\s\d\}orfuwF/%z])([orfuwF/%z])(?=([^"\\]*(\\.|"([^"\\]*\\.)*[^"\\]*"))*[^"]*$)(?=([^\'\\]*(\\.|\'([^\'\\]*\\.)*[^\'\\]*\'))*[^\']*$)', r"{\1}\2", string)							#Shorthand for one function map
 	
 	return string
 
