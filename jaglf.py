@@ -871,7 +871,7 @@ def w(stack):
 	return stack
 
 
-#Arr, Arr: Set symmetric distance
+#Arr, Arr: Set symmetric difference
 def W(stack):
 	l, r = lr(stack)
 	if isinstance(l, JArray) and isinstance(r, JArray):
