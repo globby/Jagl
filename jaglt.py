@@ -33,7 +33,7 @@ class JType:
 	def __hash__(self):
 		return hash(self.v)
 	def __repr__(self):
-		return `self.v`
+		return str(self.v)
 
 class JNum(JType):
 	def make(self, val):
@@ -58,7 +58,7 @@ class JArray(JType):
 		return '('+" ".join(map(str, self.v))+')'
 class JBlock(JType):
 	def __repr__(self):
-		return '{'+''.join(map(lambda x: str(x), self.v))+'}'
+		return '{'+''.join(map(str, self.v))+'}'
 class JFunc(JType):pass
 class EStr(JType):pass
 
