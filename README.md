@@ -80,17 +80,25 @@ Please note that the language is still in the Alpha stage, and may have bugs. If
 Changelog
 ----
 
+  Changelog:
+
     Version 1.3:
       Added:
         1) Additional functionality was added to 'n' when operating on arrays
         2) 'z' - Now performs a zipWith, using a temporary stack
         3) 'G' - Now encases the stack in an array
+        4) Short circuit syntax (see documentation)
 
       Changed:
         1) The conditional value in if and ifelse is now the leftmost argument
         2) The conditional drop ('I') is now built into 'f'
         3) 'R', when operating with arrays, no longer consumes the array
         4) 'k' and 'K' replace 'z' and 'Z' respectively
+        5) 'q' (min) and 'Q' (max) are now 'm', and 'M' respectively
+        6) 'I' now functions as 'M' did (isNumeric)
+
+      Removed:
+        1) 'q' and 'Q' are now obsolete (see Changed #5)
 
     Version 1.2:
       Added:
@@ -136,9 +144,6 @@ Changelog
       Removed:
         1) Binary number syntax. May add back if actually needed somewhere in
            the future.
-
-    Version 1.0:
-      Initial release
 
     Version 1.0:
       Initial release

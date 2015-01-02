@@ -14,8 +14,14 @@ class JType:
 		self.v = val
 	def __eq__(self, other):
 		return other.v == self.v
-	def __cmp__(self, other):
-		return self.v.__cmp__(other.v)
+	def __lt__(self, other):
+		if isinstance(other, JType):
+			return self.v < other.v
+		return self.v < other
+	def __gt__(self, other):
+		if isinstance(other, JType):
+			return self.v > other.v
+		return self.v > other
 	def __add__(self, other):
 		if isinstance(other, JType):
 			return self.v + other.v

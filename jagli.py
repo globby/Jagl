@@ -23,7 +23,7 @@ def runCode(code):
 if __name__ == "__main__":
 	parser = argparse.ArgumentParser(description="JAGL (Just A Golfing Language) Interpreter")
 	parser.add_argument('filename', help='filename', nargs='?', default=None)
-	parser.add_argument('-v', '--version', action='version', version='%(prog)s Alpha V1.3 Released Dec 31/2014')
+	parser.add_argument('-v', '--version', action='version', version='%(prog)s Alpha V1.3 Released Jan 2/2015')
 	parser.add_argument('-i', '--inter', action='store_true', help='run the interactive interpreter')
 	parser.add_argument('-c', '--code', help='execute code from the command line')
 	parser.add_argument('-C', '--changelog',action='store_true', help='print changelog')
@@ -38,12 +38,18 @@ if __name__ == "__main__":
         1) Additional functionality was added to 'n' when operating on arrays
         2) 'z' - Now performs a zipWith, using a temporary stack
         3) 'G' - Now encases the stack in an array
+        4) Short circuit syntax (see documentation)
 
       Changed:
         1) The conditional value in if and ifelse is now the leftmost argument
         2) The conditional drop ('I') is now built into 'f'
         3) 'R', when operating with arrays, no longer consumes the array
         4) 'k' and 'K' replace 'z' and 'Z' respectively
+        5) 'q' (min) and 'Q' (max) are now 'm', and 'M' respectively
+        6) 'I' now functions as 'M' did (isNumeric)
+
+      Removed:
+        1) 'q' and 'Q' are now obsolete (see Changed #5)
 
     Version 1.2:
       Added:
@@ -98,7 +104,7 @@ if __name__ == "__main__":
 	try:
 		try:
 			if args.inter:
-				print "JAGL Interpreter Alpha V1.3 - Dec 31/2014"
+				print "JAGL Interpreter Alpha V1.3 - Jan 2/2015"
 				s = Stack()
 				while True:
 					try:

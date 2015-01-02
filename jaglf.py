@@ -532,6 +532,19 @@ def i(stack):
 	return stack
 
 
+#Num: Checks if character is numeric
+#Arr: Checks all characters in string are numeric
+def I(stack):
+	top = stack.pop()
+	if isinstance(top, JNum):
+		stack.push(JNum(1) if chr(top.v).isdigit() else JNum(0))
+	elif isinstance(top, JArray):
+		stack.push(JNum(1) if ''.join(map(lambda x: chr(x.v), top.v)).isdigit() else JNum(0))
+	else:
+		stack.push(top)
+	return stack
+
+
 #Arr: Remove duplicates from array
 #Num: Convert to integer
 def j(stack):
@@ -592,6 +605,7 @@ def L(stack):
 
 
 #Num: Primality test
+#Arr: Minimum of array
 def m(stack):
 	top = stack.pop()
 	if isinstance(top, JNum):
@@ -606,19 +620,18 @@ def m(stack):
 					prime = False
 
 		stack.push(JNum(1) if prime else JNum(0))
+	elif isinstance(top, JArray):
+		stack.push(min(top.v))
 	else:
 		stack.push(top)
 	return stack
 
 
-#Num: Checks if character is numeric
-#Arr: Checks all characters in string are numeric
+#Arr: Maximum of array
 def M(stack):
 	top = stack.pop()
-	if isinstance(top, JNum):
-		stack.push(JNum(1) if chr(top.v).isdigit() else JNum(0))
-	elif isinstance(top, JArray):
-		stack.push(JNum(1) if ''.join(map(lambda x: chr(x.v), top.v)).isdigit() else JNum(0))
+	if isinstance(top, JArray):
+		stack.push(max(top.v))
 	else:
 		stack.push(top)
 	return stack
@@ -710,25 +723,6 @@ def P(stack):
 		sys.stdout.write(trep[:-1])
 	else:
 		sys.stdout.write(trep)
-	return stack
-
-
-#Arr: Minimum of array
-def q(stack):
-	top = stack.pop()
-	if isinstance(top, JArray):
-		stack.push(JNum(min(top.v)))
-	else:
-		stack.push(top)
-	return stack
-
-#Arr: Maximum of array
-def Q(stack):
-	top = stack.pop()
-	if isinstance(top, JArray):
-		stack.push(JNum(max(top.v)))
-	else:
-		stack.push(top)
 	return stack
 
 
@@ -992,7 +986,7 @@ FUNCTIONS = {
 	"h":h,
 	"H":UNDEFINED,
 	"i":i,
-	"I":UNDEFINED,
+	"I":I,
 	"j":j,
 	"J":J,
 	"k":k,
@@ -1007,8 +1001,8 @@ FUNCTIONS = {
 	"O":O,
 	"p":p,
 	"P":P,
-	"q":q,
-	"Q":Q,
+	"q":UNDEFINED,
+	"Q":UNDEFINED,
 	"r":r,
 	"R":R,
 	"s":s,
