@@ -942,7 +942,7 @@ def z(stack):
 #Print stack for debugging
 def pound(stack):
 	s = stack.s
-	print " ".join(map(lambda x: "%s< %s >" % (x.__class__.__name__, x), s))
+	print " ".join(map(lambda x: str(x), s))
 	return stack
 
 
